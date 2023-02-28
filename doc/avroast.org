@@ -1,0 +1,34 @@
+* Avroast
+
+Audio video muxer in Rust
+
+** Rationale
+
+Multiplexing is the primary function of audio and video manipulation. Most muxing operations aren't complex and might only involve trimming the audio or video track or remuxing the streams. Such operations may not even require decoders and encoders and will not modify the bitstream.
+
+*** Functionality
+
+FFmpeg is the de-facto tool for audio and video work. It wraps around every major open source encoder and decoder. But for quick and stardardized work FFMpeg has an excessive syntax.
+
+Avroast will always assume the least amount of manipulation from every command. The commandline syntax will reflect on this. Avroast will have a rich cli for easier trimming by approximating and visualizing media content and to give the user a complete overview of the operations before committing.
+
+*** Syntax
+
+The commandline syntax will be minimal as to assume the user requires the least intervention and quality loss as possible.
+
+Examples:
+
+~avroast vid1.mp4 vid2.mp4 vid3.mp4~ This command will mux every stream from vid1 followed by secondary streams from vid2 to make vid3.
+
+~avroast vid1.mp4 vid2.mp4 -m 0,0 1,1 vid3.mp4~ This command will mux stream 0 from vid1 and stream 1 from vid2 into vid3.
+
+~avroast vid1.mp4 vid2.mp4 -m * vid3.mp4~ This will mux every stream from vid1 followed by every stream from vid2 into vid3.
+
+~avroast vid.mp4 -m 0,0:hevc 0,1:aac newvid.mp4~ This will transcode stream 0 as hevc and stream 2 as aac and mux into newvid.
+
+~avroast vid1.mp4 -t 0,0=~
+
+
+*** Development
+
+Development will start on the ui aspect of av editing, with primary focus being the commandline parser and cli. Low level bitstream manipulation will be offloaded to external libraries such as audio/video codecs, FFmpeg or AviSynth, TBD.
