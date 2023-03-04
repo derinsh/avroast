@@ -9,12 +9,10 @@ mod cli;
 mod sys;
 mod av;
 
-use av::Stream;
+use av::Operation;
 
-struct Operation {
-    files: Vec<File>,
-    map: HashMap<File, Vec<i8>>,
-    streams: Vec<Stream>
+struct Roast {
+    map: HashMap<File, Operation>,
 }
 
 // TODO: basic parsing and reading pcm from wav file

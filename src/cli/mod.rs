@@ -1,5 +1,5 @@
 // CLI parser
 
-pub fn main(&args : Vec<String>) {
+pub fn main(args : Vec<String>) {
 
 }
